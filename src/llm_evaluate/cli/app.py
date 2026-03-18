@@ -11,7 +11,9 @@ app = typer.Typer(help="LLM/VLM evaluation framework")
 
 
 @app.command()
-def run(config: Path = typer.Option(..., exists=True, readable=True, help="YAML config path")) -> None:
+def run(
+    config: Path = typer.Option(..., exists=True, readable=True, help="YAML config path"),
+) -> None:
     run_config = load_run_config(config)
     runner = EvaluationRunner(run_config)
     out_dir = runner.run()
