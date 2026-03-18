@@ -1,0 +1,2 @@
+{"id":"1","prompt":"法国的首都是哪里？","answer":"巴黎","image":null,"metadata":{"domain":"geography"}}
+{"id":"2","prompt":"请描述这张图片里的场景","answer":"一只猫坐在窗台上","image":"/path/to/image.jpg","metadata":{"domain":"vision"}}
