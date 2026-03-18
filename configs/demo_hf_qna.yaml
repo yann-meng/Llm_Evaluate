@@ -1,0 +1,23 @@
+run_name: demo_hf_qna
+output_dir: outputs
+batch_size: 1
+
+dataset:
+  source: huggingface
+  name: squad
+  split: validation
+  input_column: question
+  answer_column: answers
+  limit: 5
+
+model:
+  backend: openai_compatible
+  task_type: llm
+  model_name_or_path: Qwen/Qwen2.5-7B-Instruct
+  api_base: http://127.0.0.1:8000/v1
+  api_key: EMPTY
+  max_new_tokens: 128
+  temperature: 0.0
+
+metrics:
+  names: [exact_match, token_f1]
