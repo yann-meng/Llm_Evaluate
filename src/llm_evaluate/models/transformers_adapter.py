@@ -10,20 +10,28 @@ class TransformersAdapter(ModelAdapter):
             from transformers import pipeline
         except Exception as exc:  # noqa: BLE001
             raise RuntimeError(
-                "Transformers dependencies missing. Install with `pip install transformers torch pillow`."
+                "Transformers dependencies missing. Install with "
+                "`pip install transformers torch pillow`."
             ) from exc
 
         self.config = config
+        model_kwargs: dict = {"trust_remote_code": config.trust_remote_code}
+        if config.torch_dtype != "auto":
+            model_kwargs["torch_dtype"] = config.torch_dtype
+        if config.device_map:
+            model_kwargs["device_map"] = config.device_map
+
+        pipeline_kwargs: dict = {
+            "model": config.model_name_or_path,
+            "model_kwargs": model_kwargs,
+        }
+        if config.device is not None:
+            pipeline_kwargs["device"] = config.device
+
         if config.task_type == "llm":
-            self.pipe = pipeline(
-                "text-generation",
-                model=config.model_name_or_path,
-            )
+            self.pipe = pipeline("text-generation", **pipeline_kwargs)
         else:
-            self.pipe = pipeline(
-                "image-text-to-text",
-                model=config.model_name_or_path,
-            )
+            self.pipe = pipeline("image-text-to-text", **pipeline_kwargs)
 
     def generate(self, prompt: str, image: str | None = None) -> str:
         kwargs = {

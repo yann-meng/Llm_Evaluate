@@ -1,0 +1,2 @@
+{"id":"vlm-1","prompt":"请描述这张图片的主要内容。","image":"examples/images/demo1.jpg","answer":"一张户外风景图","metadata":{"task":"image_caption","lang":"zh"}}
+{"id":"vlm-2","prompt":"图中主要物体是什么？","image":"https://example.com/demo2.jpg","answer":"一辆汽车","metadata":{"task":"vqa","lang":"zh"}}

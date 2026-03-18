@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 
-from llm_evaluate.metrics.text_metrics import exact_match, token_f1
+from llm_evaluate.metrics.text_metrics import char_f1, exact_match, rouge_l, token_f1
 
 
 class MetricsManager:
@@ -11,6 +11,8 @@ class MetricsManager:
         self._impls = {
             "exact_match": exact_match,
             "token_f1": token_f1,
+            "rouge_l": rouge_l,
+            "char_f1": char_f1,
         }
 
     def score_sample(self, prediction: str, reference: str | None) -> dict[str, float]:
