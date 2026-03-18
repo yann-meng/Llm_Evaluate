@@ -95,6 +95,7 @@ metrics:
 - `outputs/<run_id>/summary_metrics.json`
 - `outputs/<run_id>/summary_metrics.html`（可视化对比）
 
+
 ## 7. 本地 Transformers 评测示例（Qwen3-4B-Instruct + SQuAD）
 
 参见：`configs/demo_local_transformers_qwen3_squad.yaml`
@@ -102,6 +103,9 @@ metrics:
 该示例使用常用测试集 `squad` 的 `validation` split，模型路径指向本地目录（可替换为你机器上的真实路径）。
 
 ## 8. 多 GPU 与超大模型建议
+=======
+## 7. 多 GPU 与超大模型建议
+
 
 ### Transformers 本地推理（单模型切分到多卡）
 
@@ -119,7 +123,10 @@ model:
 
 在服务端启动时配置 `--tensor-parallel-size`、`--gpu-memory-utilization` 等参数；框架端通过 `api_base` 调用。
 
+
 ## 9. 一键启动脚本
 
 - vLLM: `scripts/serve_vllm_qwen3_4b.sh`
 - SGLang: `scripts/serve_sglang_qwen3_4b.sh`
+=======
+

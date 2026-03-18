@@ -33,6 +33,7 @@ def test_multi_dataset_config() -> None:
     assert {ds.dataset_id for ds in cfg.datasets} == {"math_zh", "qa_en"}
 
 
+
 def test_local_transformers_qwen3_config() -> None:
     cfg = load_run_config("configs/demo_local_transformers_qwen3_squad.yaml")
     assert cfg.model.backend == "transformers"

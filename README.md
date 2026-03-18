@@ -44,7 +44,9 @@ pip install -e '.[dev,all]'
 ```bash
 llm-evaluate run --config configs/demo_hf_qna.yaml
 llm-evaluate run --config configs/demo_multi_dataset.yaml
+
 llm-evaluate run --config configs/demo_local_transformers_qwen3_squad.yaml
+
 ```
 
 输出位于 `outputs/<run_id>/`：
@@ -100,6 +102,7 @@ src/llm_evaluate/
 
 详见 `docs/configuration.md`（包含多 GPU、超大模型、多数据集等详细说明）。
 
+
 ## 8. 推理服务启动脚本
 
 - vLLM（Qwen3-4B-Instruct）: `scripts/serve_vllm_qwen3_4b.sh`
@@ -108,6 +111,9 @@ src/llm_evaluate/
 可直接执行脚本，或通过环境变量覆盖 host/port/并行参数。
 
 ## 9. 发展建议
+=======
+## 8. 发展建议
+
 
 - 加入分布式推理（Ray / Accelerate）
 - 加入更丰富指标（BERTScore, BLEU, judge model）
