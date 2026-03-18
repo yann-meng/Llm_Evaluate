@@ -109,12 +109,3 @@ src/llm_evaluate/
 - SGLang（Qwen3-4B-Instruct）: `scripts/serve_sglang_qwen3_4b.sh`
 
 可直接执行脚本，或通过环境变量覆盖 host/port/并行参数。
-
-## 9. 发展建议
-=======
-## 8. 发展建议
-
-
-- 加入分布式推理（Ray / Accelerate）
-- 加入更丰富指标（BERTScore, BLEU, judge model）
-- 增加 benchmark presets（MMLU/C-Eval/MMBench）
