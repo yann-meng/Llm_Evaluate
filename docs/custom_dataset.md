@@ -4,6 +4,7 @@
 
 - `jsonl`: 每行一个 JSON 对象（推荐）
 - `csv`: 列名映射
+- `parquet`: 单文件或按 split 分片目录（如 `test-00000-of-00001.parquet`）
 
 ## 统一字段
 
