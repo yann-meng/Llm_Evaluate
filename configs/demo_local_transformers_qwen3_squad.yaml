@@ -2,10 +2,12 @@ run_name: demo_local_transformers_qwen3_squad
 output_dir: outputs
 batch_size: 1
 
+
 dataset:
-  dataset_id: squad_validation
-  source: huggingface
-  name: squad
+  dataset_id: AIME25
+  source: local
+  name: AIME25
+  path: /home/yann.meng/workspaces/datasets/TIGER-Lab/AIME25
   split: validation
   input_column: question
   answer_column: answers
@@ -15,9 +17,7 @@ model:
   backend: transformers
   task_type: llm
   model_source: local
-  # 本地模型目录示例：/data/models/Qwen3-4B-Instruct
-  model_name_or_path: /path/to/Qwen3-4B-Instruct
-  trust_remote_code: true
+  model_name_or_path: /home/yann.meng/workspaces/modelscope/Qwen/Qwen3-4B-Instruct
   torch_dtype: bfloat16
   device_map: auto
   max_new_tokens: 128
