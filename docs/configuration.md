@@ -48,7 +48,7 @@ metrics:
 | `name` | `str` | `null` | HF / ModelScope 数据集名 |
 | `subset` | `str` | `null` | 子集名 |
 | `split` | `str` | `test` | 评测 split |
-| `path` | `str` | `null` | 本地文件路径（jsonl/csv） |
+| `path` | `str` | `null` | 本地路径（jsonl/csv/parquet 文件，或 parquet 分片目录） |
 | `input_column` | `str` | `prompt` | 输入字段 |
 | `answer_column` | `str` | `answer` | 标准答案字段 |
 | `image_column` | `str` | `null` | 图像字段（VLM） |
@@ -129,4 +129,3 @@ model:
 - vLLM: `scripts/serve_vllm_qwen3_4b.sh`
 - SGLang: `scripts/serve_sglang_qwen3_4b.sh`
 =======
-

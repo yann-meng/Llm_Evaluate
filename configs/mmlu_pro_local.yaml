@@ -1,0 +1,23 @@
+run_name: mmlu_pro_local
+output_dir: outputs
+batch_size: 1
+
+dataset:
+  dataset_id: mmlu_pro_test
+  source: local
+  path: /home/datasets/TIGER-Lab/MMLU-Pro/data
+  split: test
+  input_column: question
+  answer_column: answer
+
+model:
+  backend: openai_compatible
+  task_type: llm
+  model_name_or_path: Qwen/Qwen2.5-7B-Instruct
+  api_base: http://127.0.0.1:8000/v1
+  api_key: EMPTY
+  max_new_tokens: 128
+  temperature: 0.0
+
+metrics:
+  names: [exact_match]
