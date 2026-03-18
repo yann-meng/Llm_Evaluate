@@ -1,0 +1,27 @@
+run_name: demo_local_transformers_qwen3_squad
+output_dir: outputs
+batch_size: 1
+
+dataset:
+  dataset_id: squad_validation
+  source: huggingface
+  name: squad
+  split: validation
+  input_column: question
+  answer_column: answers
+  limit: 50
+
+model:
+  backend: transformers
+  task_type: llm
+  model_source: local
+  # 本地模型目录示例：/data/models/Qwen3-4B-Instruct
+  model_name_or_path: /path/to/Qwen3-4B-Instruct
+  trust_remote_code: true
+  torch_dtype: bfloat16
+  device_map: auto
+  max_new_tokens: 128
+  temperature: 0.0
+
+metrics:
+  names: [exact_match, token_f1, rouge_l, char_f1]

@@ -86,7 +86,11 @@ class DatasetLoader:
                 sample_id=str(row.get("id", idx)),
                 prompt=str(row.get(config.input_column, "")),
                 answer=_extract_answer(row.get(config.answer_column)),
-                image=_optional_to_str(row.get(config.image_column)) if config.image_column else None,
+                image=(
+                    _optional_to_str(row.get(config.image_column))
+                    if config.image_column
+                    else None
+                ),
                 metadata={k: v for k, v in row.items() if k not in reserved},
             )
             samples.append(sample)

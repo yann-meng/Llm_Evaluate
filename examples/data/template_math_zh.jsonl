@@ -1,0 +1,3 @@
+{"id":"math-1","prompt":"12 + 30 = ?","answer":"42","metadata":{"domain":"math","lang":"zh"}}
+{"id":"math-2","prompt":"100除以4等于多少？","answer":"25","metadata":{"domain":"math","lang":"zh"}}
+{"id":"math-3","prompt":"7乘以8等于几？","answer":"56","metadata":{"domain":"math","lang":"zh"}}
