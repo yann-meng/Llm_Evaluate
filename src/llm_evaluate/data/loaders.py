@@ -60,6 +60,28 @@ class DatasetLoader:
         if not path.exists():
             raise DatasetLoadError(f"Local dataset not found: {path}")
 
+        if path.is_dir():
+            rows = self._load_local_dir(path, config.split)
+        else:
+            rows = self._load_local_file(path)
+
+        if config.limit:
+            rows = rows[: config.limit]
+        return rows
+
+    def _load_local_dir(self, path: Path, split: str) -> list[dict[str, Any]]:
+        parquet_files = sorted(path.glob(f"{split}-*.parquet"))
+        if parquet_files:
+            rows: list[dict[str, Any]] = []
+            for parquet_file in parquet_files:
+                rows.extend(self._load_parquet(parquet_file))
+            return rows
+
+        raise DatasetLoadError(
+            f"Local directory dataset does not contain files matching `{split}-*.parquet`: {path}"
+        )
+
+    def _load_local_file(self, path: Path) -> list[dict[str, Any]]:
         suffix = path.suffix.lower()
         if suffix == ".jsonl":
             with path.open("r", encoding="utf-8") as f:
@@ -67,12 +89,20 @@ class DatasetLoader:
         elif suffix == ".csv":
             with path.open("r", encoding="utf-8") as f:
                 rows = list(csv.DictReader(f))
+        elif suffix == ".parquet":
+            rows = self._load_parquet(path)
         else:
-            raise DatasetLoadError("Local dataset only supports .jsonl or .csv")
-
-        if config.limit:
-            rows = rows[: config.limit]
+            raise DatasetLoadError("Local dataset only supports .jsonl, .csv or .parquet")
         return rows
+
+    def _load_parquet(self, path: Path) -> list[dict[str, Any]]:
+        try:
+            import pandas as pd
+        except Exception as exc:  # noqa: BLE001
+            raise DatasetLoadError(
+                "Parquet support requires pandas/pyarrow. Install with `pip install pandas pyarrow`."
+            ) from exc
+        return pd.read_parquet(path).to_dict(orient="records")
 
     @staticmethod
     def _map_rows(rows: list[dict[str, Any]], config: DatasetConfig) -> list[EvalSample]:
