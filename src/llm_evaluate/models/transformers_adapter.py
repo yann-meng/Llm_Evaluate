@@ -15,7 +15,7 @@ class TransformersAdapter(ModelAdapter):
             ) from exc
 
         self.config = config
-        model_kwargs: dict = {"trust_remote_code": config.trust_remote_code}
+        model_kwargs: dict = {}
         if config.torch_dtype != "auto":
             model_kwargs["torch_dtype"] = config.torch_dtype
         if config.device_map:
@@ -24,6 +24,7 @@ class TransformersAdapter(ModelAdapter):
         pipeline_kwargs: dict = {
             "model": config.model_name_or_path,
             "model_kwargs": model_kwargs,
+            "trust_remote_code": config.trust_remote_code,
         }
         if config.device is not None:
             pipeline_kwargs["device"] = config.device
